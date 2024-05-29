@@ -18,7 +18,13 @@ const authenticateJWT = (req, res, next) => {
 
     jwt.verify(token, process.env.JWT, (err, user) => {
         if (err) {
-            return res.status(403).send("Invalid token");
+            if (err.name === 'TokenExpiredError') {
+                return res.status(401).send("Token expired");
+            } else if (err.name === 'JsonWebTokenError') {
+                return res.status(403).send("Invalid token");
+            } else {
+                return res.status(403).send("Token verification failed");
+            }
         }
 
         req.user = user;
