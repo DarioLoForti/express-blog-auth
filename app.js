@@ -7,8 +7,6 @@ const morgan = require('morgan');
 const postsRouter = require('./routers/posts');
 const authRouter = require('./routers/auth');
 
-const auth = require('./controllers/auth');
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

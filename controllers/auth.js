@@ -46,6 +46,7 @@ const login = (req, res) => {
     const token = generateToken(user);
     res.send(token);
 }
+
 const isAdmin = (req, res, next) => {
     const { username, password } = req.user;
     const user = users.find(u => u.username === username && u.password === password);
