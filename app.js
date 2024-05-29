@@ -10,6 +10,7 @@ const authRouter = require('./routers/auth');
 const auth = require('./controllers/auth');
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const errorsFormatter = require('./middlewares/errorsFormatter');
 const routersNotFound = require('./middlewares/routersNotFound');

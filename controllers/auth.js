@@ -5,7 +5,7 @@ const users = require('../db/users.json');
 
 
 const generateToken = (user) => {
-    return jwt.sign(user, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+    return jwt.sign(user, process.env.JWT, { expiresIn: '1h' });
 }
 
 const authenticateJWT = (req, res, next) => {
@@ -16,7 +16,7 @@ const authenticateJWT = (req, res, next) => {
 
     const token = authorization.split(' ')[1];
 
-    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT, (err, user) => {
         if (err) {
             return res.status(403).send("Invalid token");
         }
@@ -32,12 +32,13 @@ const index = (req, res) => {
 
 const login = (req, res) => {
     const { username, password } = req.body;
+    console.log(username, password);
     const user = users.find(u => u.username === username && u.password === password);
     if (!user) {
-        return res.status(401).json({ message: "Invalid credentials" });
+        return res.status(401).send("Invalid username or password");
     }
-    const token = generateToken({ username });
-    res.json({ token });
+    const token = generateToken(user);
+    res.send(token);
 }
 
 
