@@ -9,23 +9,28 @@ const generateToken = (user) => {
 }
 
 const authenticateJWT = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
-
-    if (!token) {
-        return res.status(401).json({ message: "Auth Error" });
+    const {authorization} = req.headers;
+    if (!authorization) {
+        return res.status(401).send("You need to login");
     }
+
+    const token = authorization.split(' ')[1];
 
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
         if (err) {
-            console.log(err);
-            return res.status(403).json({ message: "Token is not valid" });
+            return res.status(403).send("Invalid token");
         }
+
         req.user = user;
         next();
     });
 }
 
 const index = (req, res) => {
+    res.send('Auth index');
+}
+
+const login = (req, res) => {
     const { username, password } = req.body;
     const user = users.find(u => u.username === username && u.password === password);
     if (!user) {
@@ -39,5 +44,6 @@ const index = (req, res) => {
 module.exports = {
     generateToken,
     authenticateJWT,
-    index
+    index,
+    login
 }
