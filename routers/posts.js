@@ -3,6 +3,8 @@ const router = express.Router();
 const postController = require('../controllers/postController');
 const postSlugExist = require('../middlewares/postSlugExist');
 
+const auth = require('../controllers/auth.js');
+
 const multer = require("multer");
 const uploader = multer({dest: "public/images"});
 

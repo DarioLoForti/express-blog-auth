@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 
 const morgan = require('morgan');
 const postsRouter = require('./routers/posts');
+const authRouter = require('./routers/auth');
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,6 +21,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/posts', postsRouter);
+
+app.use('/auth', authRouter);
 
 app.use(routersNotFound);
 
