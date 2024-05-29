@@ -1,0 +1,19 @@
+{
+  "name": "express-blog-auth",
+  "version": "1.0.0",
+  "description": "Ciao ragazzi, esercizio di oggi: express-blog-auth\r Esercizio\r Creiamo le seguenti rotte:\r home\r posts/ (index)\r posts/ (store)\r posts/:slug (show)\r Tramite JTW creiamo una rotta per autenticare un utente ed ottenere il Token JWT e tramite un middleware limitiamo l'accesso alla rota store dei post ai soli utenti loggati.\r Gestiamo, attraverso dei middlewares, gli errori e le pagine 404.\r Questi middleware dovranno rispondere con un json contente il codice ed il messaggio dell'errore.\r Svolgiamo tutto l'esercizio tramite relativi controller e router.\r Bonus\r Ritornare un errore diverso nel caso il jwt sia non valido o scaduto\r Creare un middleware per proteggere le rotte riservate agli utenti admin",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.2"
+  }
+}
