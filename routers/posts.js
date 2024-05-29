@@ -7,10 +7,11 @@ const auth = require('../controllers/auth.js');
 
 const multer = require("multer");
 const uploader = multer({dest: "public/images"});
-// router.use(auth.authenticateJWT);
+
+router.use(auth.authenticateJWT);
 
 router.get('/', postController.index);
-router.post('/', auth.authenticateJWT, uploader.single("image"), postController.store);
+router.post('/', auth.isAdmin, uploader.single("image"), postController.store);
 // router.get('/create', postController.create);
 router.get('/:slug', postController.show);
 router.delete('/:slug', postSlugExist, postController.destroy);

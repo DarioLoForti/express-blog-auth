@@ -2,12 +2,14 @@
   {
     "id": 1,
     "username": "mario.rossi",
-    "password": "password"
+    "password": "password",
+    "admin": "true"
   },
   {
     "id": 2,
     "username": "giuseppe.verdi",
-    "password": "password"
+    "password": "password",
+    "admin": "true"
   },
   {
     "id": 3,
