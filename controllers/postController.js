@@ -54,7 +54,7 @@ const show = (req, res) => {
       }
     });
   } else {
-    res.status(404).send('Post not found');
+    return res.status(404).send('Post not found');
   }
 };
 
