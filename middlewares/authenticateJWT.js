@@ -1,3 +1,11 @@
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const generateToken = (user) => {
+    return jwt.sign(user, process.env.JWT, { expiresIn: '1h' });
+}
+
+
 const authenticateJWT = (req, res, next) => {
     const {authorization} = req.headers;
     if (!authorization) {
@@ -30,7 +38,10 @@ const isAdmin = (req, res, next) => {
     }
     next();
 }
+
+
 module.exports = {
     authenticateJWT,
-    isAdmin
+    isAdmin,
+    generateToken
 }
