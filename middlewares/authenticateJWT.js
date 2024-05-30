@@ -9,7 +9,14 @@ const generateToken = (user) => {
 const authenticateJWT = (req, res, next) => {
     const {authorization} = req.headers;
     if (!authorization) {
-        return res.status(401).send("You need to login");
+        return res.format({
+            'text/html': function () {
+                res.status(401).send("<h2>You need to login</h2>");
+            },
+            'json': function () {
+                res.status(401).json({ error: "You need to login" });
+            }
+        });
     }
 
     const token = authorization.split(' ')[1];
@@ -36,12 +43,13 @@ const isAdmin = (req, res, next) => {
     if (!user || !user.admin) {
         return res.status(403).send("You are not an admin");
     }
+    req.user.admin = true
     next();
 }
 
 
 module.exports = {
+    generateToken,
     authenticateJWT,
-    isAdmin,
-    generateToken
+    isAdmin
 }
